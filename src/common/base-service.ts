@@ -21,7 +21,7 @@ export class BaseService {
     return await this._repository.save(entity).then(entity => entity);
   }
 
-  update(id: string, entity): Promise<any> {
-    return this._repository.update(id, entity);
+  async update(id: string, entity): Promise<any> {
+    return await this._repository.update(id, entity);
   }
 }

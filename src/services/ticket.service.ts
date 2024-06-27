@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class TicketService extends BaseService {
-  constructor(@InjectRepository(Category) public ticketRepository: Repository<Ticket>) {
+  constructor(@InjectRepository(Ticket) public ticketRepository: Repository<Ticket>) {
     super(ticketRepository, ['tickethistory']);
   }
 }

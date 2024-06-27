@@ -6,6 +6,9 @@ import { User } from './entities/user.entity';
 import { Category } from './entities/category.entity';
 import { Ticket } from './entities/ticket.entity';
 import { Tickethistory } from './entities/tickethistory.entity';
+import { CategoryModule } from './modules/category.module';
+import { TicketModule } from './modules/ticket.module';
+import { UserModule } from './modules/user.module';
 
 @Module({
   imports: [
@@ -28,6 +31,9 @@ import { Tickethistory } from './entities/tickethistory.entity';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    CategoryModule,
+    TicketModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,6 +3,7 @@ import {
     PrimaryGeneratedColumn,
     Column,
     ManyToOne,
+    Timestamp,
 } from 'typeorm';
 import { User } from './user.entity';
 import { Category } from './category.entity';
@@ -21,4 +22,9 @@ export class Tickethistory{
 
     @ManyToOne(() => User, user => user.actionhistory)
     user: User;
+
+    @Column('timestamp', {
+        default: () => `now()`,
+    })
+    createdAt: Timestamp;
 }

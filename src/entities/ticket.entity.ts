@@ -4,6 +4,7 @@ import {
     Column,
     ManyToOne,
     OneToMany,
+    Timestamp,
 } from 'typeorm';
 import { Category } from './category.entity';
 import { Tickethistory } from './tickethistory.entity';
@@ -24,4 +25,9 @@ export class Ticket {
 
     @OneToMany(() => Tickethistory, tickethistory => tickethistory.ticket)
     tickethistory: Tickethistory;
+
+    @Column('timestamp', {
+        default: () => `now()`,
+    })
+    createdAt: Timestamp;
 }
