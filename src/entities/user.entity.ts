@@ -2,20 +2,17 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm';
+import { Tickethistory } from './tickethistory.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  firstName: string;
-
-  @Column({ nullable: true })
-  lastName: string;
-
-  @Column({ unique: true, nullable: true, default: null })
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -23,4 +20,7 @@ export class User {
 
   @Column()
   refresh_token: string;
+
+  @OneToMany(() => Tickethistory, tickethistory => tickethistory.user)
+  actionhistory: Tickethistory;
 }

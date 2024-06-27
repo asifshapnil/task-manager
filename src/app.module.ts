@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { Category } from './entities/category.entity';
+import { Ticket } from './entities/ticket.entity';
+import { Tickethistory } from './entities/tickethistory.entity';
 
 @Module({
   imports: [
@@ -17,7 +20,10 @@ import { User } from './entities/user.entity';
         rejectUnauthorized: false,
       },
       entities: [
-        User
+        User,
+        Ticket,
+        Tickethistory,
+        Category
       ],
       autoLoadEntities: true,
       synchronize: true,
