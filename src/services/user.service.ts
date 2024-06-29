@@ -52,12 +52,12 @@ export class UserService extends BaseService {
   }
 
   async refreshTokens(userId: number, rt: string): Promise<any> {
-    const user = await this.find({
+    const user = await this.findOne({
       id: userId
     });
     if (!user || !user.refresh_token) throw new ForbiddenException('Access Denied');
 
-    const rtMatches = await argon.verify(user.hashedRt, rt);
+    const rtMatches = await argon.verify(user.refresh_token, rt);
     if (!rtMatches) throw new ForbiddenException('Access Denied');
 
     const tokens = await this.getTokens(user.id, user.email);
