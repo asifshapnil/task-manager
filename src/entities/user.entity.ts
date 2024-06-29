@@ -23,7 +23,7 @@ export class User {
   refresh_token: string;
 
   @OneToMany(() => Tickethistory, tickethistory => tickethistory.user)
-  actionhistory: Tickethistory;
+  actionhistory: Tickethistory[];
 
   @Column('timestamp', {
     default: () => `now()`,

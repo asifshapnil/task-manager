@@ -15,7 +15,7 @@ export class Category {
     @Column()
     name: string;
 
-    @OneToMany(() => Ticket, ticket => ticket.category)
+    @OneToMany(() => Ticket, ticket => ticket.category, {cascade: true})
     tickets: Ticket[];
 
     @Column('timestamp', {

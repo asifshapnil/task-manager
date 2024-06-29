@@ -23,8 +23,8 @@ export class Ticket {
     @ManyToOne(() => Category, category => category.tickets)
     category: Category;
 
-    @OneToMany(() => Tickethistory, tickethistory => tickethistory.ticket)
-    tickethistory: Tickethistory;
+    @OneToMany(() => Tickethistory, tickethistory => tickethistory.ticket, {cascade: true})
+    tickethistory: Tickethistory[];
 
     @Column('timestamp', {
         default: () => `now()`,
