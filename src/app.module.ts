@@ -9,9 +9,15 @@ import { Tickethistory } from './entities/tickethistory.entity';
 import { CategoryModule } from './modules/category.module';
 import { TicketModule } from './modules/ticket.module';
 import { UserModule } from './modules/user.module';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
+import { AccessTokenGuard } from './core/guards/auth.guard';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    JwtModule.register({}),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'dpg-cpukhatds78s73dv0a4g-a.singapore-postgres.render.com',
@@ -36,6 +42,8 @@ import { UserModule } from './modules/user.module';
     UserModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService
+  ],
 })
-export class AppModule {}
+export class AppModule { }

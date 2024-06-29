@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Get, Post, Body, Put, Param, Delete, UseGuards, Req, ValidationPipe } from '@nestjs/common';
+import { AccessTokenGuard } from 'src/core/guards/auth.guard';
 
 export class BaseController {
   private createDto: any;
@@ -10,17 +11,19 @@ export class BaseController {
     this.updateDto = dtoClasses.updateDto;
   }
 
+  @UseGuards(AccessTokenGuard)
   @Get()
   async findAll(): Promise<any[]> {
     return await this.dataService.findAll();
   }
 
+  @UseGuards(AccessTokenGuard)
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<any> {
     return await this.dataService.findOne(id);
   }
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AccessTokenGuard)
   @Post()
   async insert(@Body() createDtoData: any): Promise<any> {
     try {
@@ -37,13 +40,13 @@ export class BaseController {
     }
   }
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AccessTokenGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateDtoData: any): Promise<any> {
     try {
       // Use the DTO class directly for validation
       const validatedUpdateDto = await new ValidationPipe({ transform: true }).transform(updateDtoData, {
-        metatype: this.createDto,
+        metatype: this.updateDto,
         type: 'body',
       });
       
@@ -54,7 +57,7 @@ export class BaseController {
     }
   }
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AccessTokenGuard)
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.dataService.remove(id);

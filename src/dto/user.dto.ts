@@ -10,3 +10,28 @@ export class CUUserDto {
   @IsString()
   refresh_token: string;
 }
+
+export class SignUpDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}
+
+export class SignInDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}
+
+export class LogoutDto {
+  @IsNotEmpty()
+  userId: number;
+}

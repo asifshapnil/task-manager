@@ -9,11 +9,21 @@ export class BaseService {
     return this._repository.find({ relations: this.relations, order: {createdAt: 'DESC'} });
   }
 
-  findOne(id: string): Promise<any> {
+  findOne(query: any): Promise<any> {
+    return this._repository.findOne({where: query}, { relations: this.relations });
+  }
+
+  findById(id: number): Promise<any> {
     return this._repository.findOne(id, { relations: this.relations });
   }
 
-  async remove(id: string): Promise<void> {
+  find(query: any): Promise<any> {
+    return this._repository.find({
+      where: query
+    }, { relations: this.relations });
+  }
+
+  async remove(id: number): Promise<void> {
     await this._repository.delete(id);
   }
 
@@ -21,7 +31,7 @@ export class BaseService {
     return await this._repository.save(entity).then(entity => entity);
   }
 
-  async update(id: string, entity): Promise<any> {
+  async update(id: number, entity): Promise<any> {
     return await this._repository.update(id, entity);
   }
 }
