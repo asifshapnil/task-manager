@@ -33,10 +33,10 @@ export class UserService extends BaseService {
       email: dto.email
     });
 
-    if (!user) throw new ForbiddenException('Access Denied');
+    if (!user) throw new ForbiddenException(['Access Denied: User not found']);
 
     const passwordMatches = await argon.verify(user.password, dto.password);
-    if (!passwordMatches) throw new ForbiddenException('Access Denied');
+    if (!passwordMatches) throw new ForbiddenException(['Access Denied: Password does not match']);
 
     const tokens = await this.getTokens(user.id, user.email);
     await this.updateRefreshToken(user.id, tokens.refresh_token);
