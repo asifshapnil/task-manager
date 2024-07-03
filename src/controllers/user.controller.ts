@@ -31,6 +31,6 @@ export class UserController extends BaseController {
   @UseGuards(RefreshTokenGuard)
   @Post('refresh')
   refreshTokens(@Body() dto: any): Promise<any> {
-    return this.userService.refreshTokens(dto.userId, dto.refreshToken);
+    return this.userService.refreshTokens(dto.email, dto.refresh_token);
   }
 }

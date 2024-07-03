@@ -51,9 +51,9 @@ export class UserService extends BaseService {
     return true;
   }
 
-  async refreshTokens(userId: number, rt: string): Promise<any> {
+  async refreshTokens(email: string, rt: string): Promise<any> {
     const user = await this.findOne({
-      id: userId
+      email: email
     });
     if (!user || !user.refresh_token) throw new ForbiddenException('Access Denied');
 

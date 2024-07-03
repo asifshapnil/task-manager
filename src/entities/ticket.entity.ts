@@ -20,6 +20,9 @@ export class Ticket {
     @Column()
     description: string;
 
+    @Column({default: 'high'})
+    priority: 'high' | 'medium' | 'low';
+
     @ManyToOne(() => Category, category => category.tickets)
     category: Category;
 
