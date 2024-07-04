@@ -7,8 +7,4 @@ export class CUTicketDto {
 
   @IsString()
   description: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  categoryId: string;
 }

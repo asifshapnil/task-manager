@@ -20,7 +20,11 @@ export class BaseController {
   @UseGuards(AccessTokenGuard)
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<any> {
-    return await this.dataService.findOne(id);
+    return await this.dataService.findOne(
+      {
+        id: id
+      }
+    );
   }
 
   @UseGuards(AccessTokenGuard)
@@ -49,7 +53,7 @@ export class BaseController {
         metatype: this.updateDto,
         type: 'body',
       });
-      
+
       return this.dataService.update(id, validatedUpdateDto);
     } catch (error) {
       // Handle validation error or other exceptions

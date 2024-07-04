@@ -20,6 +20,9 @@ export class Ticket {
     @Column()
     description: string;
 
+    @Column({type: 'date', nullable: true})
+    expirydate: string;
+
     @Column({default: 'high'})
     priority: 'high' | 'medium' | 'low';
 
