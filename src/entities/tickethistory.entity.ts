@@ -19,7 +19,7 @@ export class Tickethistory{
     @ManyToOne(() => Ticket, ticket => ticket.tickethistory)
     ticket: Ticket;
 
-    @ManyToOne(() => User, user => user.tickethistory)
+    @ManyToOne(() => User, user => user.tickethistory, { eager: true })
     user: User;
 
     @Column('timestamp', {

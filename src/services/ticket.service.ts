@@ -8,6 +8,6 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class TicketService extends BaseService {
   constructor(@InjectRepository(Ticket) public ticketRepository: Repository<Ticket>) {
-    super(ticketRepository, ['tickethistory']);
+    super(ticketRepository, ['tickethistory', 'tickethistory.user']);
   }
 }
