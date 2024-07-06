@@ -22,8 +22,8 @@ export class User {
   @Column({ nullable: true })
   refresh_token: string;
 
-  @OneToMany(() => Tickethistory, tickethistory => tickethistory.user)
-  actionhistory: Tickethistory[];
+  @OneToMany(() => Tickethistory, tickethistory => tickethistory.user, {cascade: true, eager : true})
+  tickethistory: Tickethistory[];
 
   @Column('timestamp', {
     default: () => `now()`,

@@ -29,7 +29,7 @@ export class Ticket {
     @ManyToOne(() => Category, category => category.tickets)
     category: Category;
 
-    @OneToMany(() => Tickethistory, tickethistory => tickethistory.ticket, {cascade: true})
+    @OneToMany(() => Tickethistory, tickethistory => tickethistory.ticket, {cascade: true, eager : true})
     tickethistory: Tickethistory[];
 
     @Column('timestamp', {

@@ -28,7 +28,11 @@ export class BaseService {
   }
 
   async insert(entity): Promise<any> {
-    return await this._repository.save(entity).then(entity => entity);
+    try {
+      return await this._repository.save(entity).then(entity => entity);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async update(id: number, entity): Promise<any> {

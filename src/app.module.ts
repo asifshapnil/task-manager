@@ -14,6 +14,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { AccessTokenGuard } from './core/guards/auth.guard';
 import { NotificationModule } from './modules/notification.module';
+import { TickethistoryModule } from './modules/tickethistory.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { NotificationModule } from './modules/notification.module';
     }),
     CategoryModule,
     TicketModule,
+    TickethistoryModule,
     UserModule,
     NotificationModule
   ],

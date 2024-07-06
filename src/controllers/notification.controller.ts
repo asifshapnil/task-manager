@@ -6,10 +6,7 @@ import { NotificationService } from 'src/services/notification.service';
 @Controller('notifications')
 export class NotificationController extends BaseController {
   constructor(public notificationService: NotificationService) {
-    super(notificationService, {
-      createDto: {},
-      updateDto: {}
-    });
+    super(notificationService);
   }
 
   @UseGuards(AccessTokenGuard)

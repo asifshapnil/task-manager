@@ -6,9 +6,11 @@ export class BaseController {
   private createDto: any;
   private updateDto: any;
 
-  constructor(public dataService: any, protected dtoClasses: { createDto: any, updateDto: any }) {
-    this.createDto = dtoClasses.createDto;
-    this.updateDto = dtoClasses.updateDto;
+  constructor(public dataService: any, protected dtoClasses?: { createDto: any, updateDto: any }) {
+    if(dtoClasses) {
+      this.createDto = dtoClasses.createDto;
+      this.updateDto = dtoClasses.updateDto;
+    }
   }
 
   @UseGuards(AccessTokenGuard)
@@ -32,10 +34,10 @@ export class BaseController {
   async insert(@Body() createDtoData: any): Promise<any> {
     try {
       // Use the DTO class directly for validation
-      const validatedCreateDto = await new ValidationPipe({ transform: true }).transform(createDtoData, {
+      const validatedCreateDto = this.createDto ? await new ValidationPipe({ transform: true }).transform(createDtoData, {
         metatype: this.createDto,
         type: 'body',
-      });
+      }) : createDtoData;
 
       return this.dataService.insert(validatedCreateDto);
     } catch (error) {
@@ -49,10 +51,10 @@ export class BaseController {
   async update(@Param('id') id: string, @Body() updateDtoData: any): Promise<any> {
     try {
       // Use the DTO class directly for validation
-      const validatedUpdateDto = await new ValidationPipe({ transform: true }).transform(updateDtoData, {
+      const validatedUpdateDto = this.updateDto ? await new ValidationPipe({ transform: true }).transform(updateDtoData, {
         metatype: this.updateDto,
         type: 'body',
-      });
+      }): updateDtoData;
 
       return this.dataService.update(id, validatedUpdateDto);
     } catch (error) {

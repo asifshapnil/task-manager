@@ -6,7 +6,6 @@ import {
     Timestamp,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Category } from './category.entity';
 import { Ticket } from './ticket.entity';
 
 @Entity()
@@ -15,12 +14,12 @@ export class Tickethistory{
     id: number;
 
     @Column()
-    action: 'add' | 'update';
+    action: string;
 
     @ManyToOne(() => Ticket, ticket => ticket.tickethistory)
     ticket: Ticket;
 
-    @ManyToOne(() => User, user => user.actionhistory)
+    @ManyToOne(() => User, user => user.tickethistory)
     user: User;
 
     @Column('timestamp', {
